@@ -1,11 +1,39 @@
 # Description
-Build automation in less time than it takes to write an email.
+Automation any workflow in less time than it takes to write an email.
 
-If you know English you can start automating.
+No need to write tones of code just write a few plain english instructions.
+
+(example gif. Typing in fun automation and running in cli)
+
+
+# The Problem
+All developers have a huge todo list of tasks they want to automate but never find the time. Why?
+
+The problem is that, even for experianced devs, writing automation takes a long time. Setting up a package, installing and using sdks, trying to remember cron syntax, deployment etc.
+
+Ayrton is a better way. You just write automation as a set of simple english instuctions and Ayrton takes care of the rest.
+
+For example to send an SMS in JavaScript you would have to write:
+``` javascript
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+const message = await client.messages
+            .create({
+                body: message,
+                from: from,
+                to: to
+            });
+
+```
+
+With ayrton this becomes simply:
+`` send sms from "+528273" to "+928757" with message "hey from ayrton" ``
+
 
 ## Features
-
-- Write automation in plain text
+- Write workflow automations in plain text
 - Many built in utilities
 - Easily extended with JavaScript
 
@@ -15,18 +43,18 @@ If you know English you can start automating.
 every "60" minutes
 get top "20" HN stories 
 if {title} contains "automation"
-send sms to "07884234571" with {title} and {url}
+send email with {title} and {url}
 
-### Hacker News alerts
-When new product added to shopify store
-if {product} discounted 
-publish tweet "New product add to sale. {description} {price}"
+### Tweeting new products
+When new item added to shopify store
+if {product} is "discounted" 
+publish tweet "New product added to sale. {description} {price}"
 
 ## Installation
 ``npm install -g ayrton``
 
 ## Usage
-``ayrton --workflows ~/me/cool-workflows``
+``ayrton --workflows ~/me/workflows``
 
 ## Extending
-``ayrton --workflows ~/me/cool-workflows --extentions ~/me/cool-extentions``
+``ayrton --workflows ~/me/workflows --custom-steps ~/me/custom-steps``
