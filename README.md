@@ -1,7 +1,7 @@
 # Description
 Automation any workflow in less time than it takes to write an email.
 
-No need to write tones of code just write a few plain english instructions.
+No need to write tones of code just write simple instructions in plain english.
 
 (example gif. Typing in fun automation and running in cli)
 
@@ -19,17 +19,28 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-const message = await client.messages
-            .create({
-                body: message,
-                from: from,
-                to: to
-            });
+const message = 'hey from ayrton';
+const from = '+528273';
+const to = '+928757';
+try{
+    const message = await client.messages
+                .create({
+                    body: message,
+                    from: from,
+                    to: to
+                });
+}catch(e){
+    console.log('handle error')
+}
+
 
 ```
 
 With ayrton this becomes simply:
-`` send sms from "+528273" to "+928757" with message "hey from ayrton" ``
+
+``` 
+send sms from "+528273" to "+928757" with message "hey from ayrton" 
+```
 
 
 ## Features
@@ -40,21 +51,31 @@ With ayrton this becomes simply:
 ## Examples Automations
 
 ### Hacker News alerts
+```
 every "60" minutes
 get top "20" HN stories 
 if {title} contains "automation"
-send email with {title} and {url}
+send email with "new automation story on HN" and {title} and {url}
+```
 
 ### Tweeting new products
+```
 When new item added to shopify store
 if {product} is "discounted" 
 publish tweet "New product added to sale. {description} {price}"
+```
 
 ## Installation
-``npm install -g ayrton``
+```
+npm install -g ayrton
+```
 
 ## Usage
-``ayrton --workflows ~/me/workflows``
+```
+ayrton --workflows ~/me/workflows
+```
 
 ## Extending
-``ayrton --workflows ~/me/workflows --custom-steps ~/me/custom-steps``
+```
+ayrton --workflows ~/me/workflows --custom-steps ~/me/custom-steps
+```
