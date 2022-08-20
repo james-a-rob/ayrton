@@ -1,7 +1,9 @@
 # Description
-Automation any workflow in less time than it takes to write an email.
+Automate any workflow in less time than it takes to write an email.
 
-No need to write tones of code just write simple instructions in plain english.
+No need to write tones of code, just write simple instructions in plain english. 
+
+I like to think of Ayrton as a no-code tool built for coders.
 
 (example gif. Typing in fun automation and running in cli)
 
@@ -9,11 +11,11 @@ No need to write tones of code just write simple instructions in plain english.
 # The Problem
 All developers have a huge todo list of tasks they want to automate but never find the time. Why?
 
-The problem is that, even for experianced devs, writing automation takes a long time. Setting up a package, installing and using sdks, trying to remember cron syntax, deployment etc.
+The problem is that, even for experienced devs, writing automation takes a long time. Setting up a package, installing and using sdks, trying to remember cron syntax, error handling, deployment etc.
 
-Ayrton is a better way. You just write automation as a set of simple english instuctions and Ayrton takes care of the rest.
+Ayrton is a better way. You just write automation as a set of simple english instuctions and this library takes care of the rest.
 
-For example to send an SMS in JavaScript you would have to write:
+❌ For example, one common action in many automations is sending an SMS. In JavaScript you would have to write:
 ``` javascript
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -36,11 +38,13 @@ try{
 
 ```
 
-With ayrton this becomes simply:
+✔️ With ayrton this becomes:
 
 ``` 
 send sms from "+528273" to "+928757" with message "hey from ayrton" 
 ```
+
+Use one of the many [built in automation steps](built-in-steps.md) (known in Ayrton as a "step") like the SMS example above or build your own in TypeScript or JavaScript.
 
 
 ## Features
@@ -51,7 +55,7 @@ send sms from "+528273" to "+928757" with message "hey from ayrton"
 ## Examples Automations
 
 ### Hacker News alerts
-```
+``` 
 every "60" minutes
 get top "20" HN stories 
 if {title} contains "automation"
@@ -71,11 +75,21 @@ npm install -g ayrton
 ```
 
 ## Usage
+``` javascript
+import ayrton from 'ayrton';
+
+ayrton.start('workflow/directory', 'custom-steps/directory');
+ayrton.on('error', (error)=>{
+    console.log(error);
+});
+```
+
+## CLI Usage (TODO)
 ```
 ayrton --workflows ~/me/workflows
 ```
 
-## Extending
+## CLI run with custom steps (TODO)
 ```
 ayrton --workflows ~/me/workflows --custom-steps ~/me/custom-steps
 ```

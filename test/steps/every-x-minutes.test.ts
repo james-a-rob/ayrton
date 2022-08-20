@@ -6,7 +6,7 @@ describe('everyXMinutes', () => {
         jest.useFakeTimers();
 
         const callbackSpy = jest.fn();
-        everyXMinutes.func({}, [10], callbackSpy);
+        everyXMinutes.run({ utilities: {}, stepInputs: [10], next: callbackSpy });
         jest.advanceTimersByTime(1200000);
         expect(callbackSpy).toHaveBeenCalledTimes(2);
 

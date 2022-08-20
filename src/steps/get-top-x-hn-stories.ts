@@ -1,16 +1,13 @@
-import * as cron from 'node-cron';
-import { Utilities } from './interfaces';
+import axios from 'axios';
+
+import { ActionStepRunArgs } from './interfaces';
 
 const step = {
-    text: 'get top {} HN stories ',
-    type: 'iterator',
-    func: (utilities: Utilities, stepInputs: [any], next: () => void) => {
-        // get hn stories 
-        // map response
-        // get first x
-
-
-        // return a clean up fn. Will be called when workflow ends
+    text: 'get top {} HN stories',
+    type: 'action',
+    run: async (args: ActionStepRunArgs) => {
+        const response = await axios.get(`https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=${args.stepInputs[0]}`);
+        return args.next(response.data.hits);
     }
 }
 

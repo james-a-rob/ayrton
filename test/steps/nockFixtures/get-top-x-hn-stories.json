@@ -1,0 +1,101 @@
+[
+    {
+        "scope": "https://hn.algolia.com:443",
+        "method": "GET",
+        "path": "/api/v1/search?tags=front_page&hitsPerPage=1",
+        "body": "",
+        "status": 200,
+        "response": {
+            "hits": [
+                {
+                    "created_at": "2022-08-20T02:27:18.000Z",
+                    "title": "Diablo 1 for Web Browsers",
+                    "url": "https://github.com/d07RiV/diabloweb",
+                    "author": "nsoonhui",
+                    "points": 366,
+                    "story_text": null,
+                    "comment_text": null,
+                    "num_comments": 84,
+                    "story_id": null,
+                    "story_title": null,
+                    "story_url": null,
+                    "parent_id": null,
+                    "created_at_i": 1660962438,
+                    "_tags": [
+                        "story",
+                        "author_nsoonhui",
+                        "story_32528433",
+                        "front_page"
+                    ],
+                    "objectID": "32528433",
+                    "_highlightResult": {
+                        "title": {
+                            "value": "Diablo 1 for Web Browsers",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "url": {
+                            "value": "https://github.com/d07RiV/diabloweb",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "author": {
+                            "value": "nsoonhui",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        }
+                    }
+                }
+            ],
+            "nbHits": 37,
+            "page": 0,
+            "nbPages": 37,
+            "hitsPerPage": 1,
+            "exhaustiveNbHits": true,
+            "exhaustiveTypo": true,
+            "query": "",
+            "params": "advancedSyntax=true&analytics=true&analyticsTags=backend&hitsPerPage=1&tags=front_page",
+            "processingTimeMS": 1,
+            "processingTimingsMS": {
+                "total": 1
+            }
+        },
+        "rawHeaders": [
+            "Date",
+            "Sat, 20 Aug 2022 16:29:59 GMT",
+            "Content-Type",
+            "application/json; charset=utf-8",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "ETag",
+            "W/\"8ce50d6499e2ddde193970f07cfd2c18\"",
+            "Cache-Control",
+            "max-age=0, private, must-revalidate",
+            "X-Request-Id",
+            "4f9ea304-849c-4ec5-b44e-89cef538ba55",
+            "X-Runtime",
+            "0.029963",
+            "Access-Control-Allow-Origin",
+            "*",
+            "Access-Control-Allow-Methods",
+            "GET, PUT, DELETE, POST, OPTIONS",
+            "Access-Control-Allow-Headers",
+            "x-algolia-application-id, connection, origin, x-algolia-api-key, content-type, content-length, x-algolia-signature, x-algolia-usertoken, x-algolia-tagfilters, DNT, X-Mx-ReqToken, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Authorization, Accept",
+            "Access-Control-Allow-Credentials",
+            "false",
+            "CF-Cache-Status",
+            "DYNAMIC",
+            "Expect-CT",
+            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains; preload",
+            "Server",
+            "cloudflare",
+            "CF-RAY",
+            "73dc82cb3a25e628-LHR"
+        ],
+        "responseIsBinary": false
+    }
+]
