@@ -41,10 +41,10 @@ try{
 ✔️ With ayrton this becomes:
 
 ``` 
-send sms from "+528273" to "+928757" with message "hey from ayrton" 
+send sms from {+528273} to {+928757} with message {hey from ayrton} 
 ```
 
-Use one of the many [built in automation steps](built-in-steps.md) (known in Ayrton as a "step") like the SMS example above or build your own in TypeScript or JavaScript.
+Use one of the many [built in automation steps](built-in-steps.md) (known in Ayrton simply as a "step") like the SMS example above or build your own in TypeScript or JavaScript.
 
 
 ## Features
@@ -56,17 +56,17 @@ Use one of the many [built in automation steps](built-in-steps.md) (known in Ayr
 
 ### Hacker News alerts
 ``` 
-every "60" minutes
-get top "20" HN stories 
-if {title} contains "automation"
-send email with "new automation story on HN" and {title} and {url}
+every {60} minutes
+get top {20} HN stories 
+if {$title} contains {automation}
+send email with {new automation story on HN} and {$title} and {$url}
 ```
 
 ### Tweeting new products
 ```
 When new item added to shopify store
-if {product} is "discounted" 
-publish tweet "New product added to sale. {description} {price}"
+if {$product} is "discounted" 
+publish tweet {New product added to sale} {$description} {$price}
 ```
 
 ## Installation
