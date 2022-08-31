@@ -3,22 +3,45 @@ import runner from '../../src/runner/index';
 
 describe('runner', () => {
 
-    it('happy path', () => {
+    it('simple', () => {
+        const actionStep2 = jest.fn(({ data, next }) => {
+            next();
+        });
+        runner([
+            {
+                name: 'trigger step',
+                run: ({ next }) => {
+                    next();
+                }
+
+            },
+            {
+                name: 'action step',
+                run: ({ next }) => {
+
+                    next();
+                }
+
+            },
+            {
+                name: 'action step 2',
+                run: actionStep2
+
+            }
+        ]);
+        expect(actionStep2).toHaveBeenCalledTimes(1);
+    });
+
+
+    it('simple with data passing', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
             const newData = { three: 'three' };
 
             next(newData);
         });
         runner([
-            [
-                'trigger step',
-                'action step',
-                'action step 2'
-            ]
-        ], [
             {
-                text: 'trigger step',
-                type: 'trigger',
+                name: 'trigger step',
                 run: ({ next }) => {
                     const newData = { one: 'one' };
                     next(newData);
@@ -26,8 +49,7 @@ describe('runner', () => {
 
             },
             {
-                text: 'action step',
-                type: 'action',
+                name: 'action step',
                 run: ({ data, next }) => {
                     const newData = { two: 'two' };
 
@@ -36,13 +58,12 @@ describe('runner', () => {
 
             },
             {
-                text: 'action step 2',
-                type: 'action',
+                name: 'action step 2',
                 run: actionStep2
 
             }
         ]);
-        expect(actionStep2).toHaveBeenCalledTimes(1);
+        expect(actionStep2.mock.calls[0][0].data.two).toEqual('two');
     });
 
     it('happy path with multiple trigger callbacks', () => {
@@ -54,37 +75,26 @@ describe('runner', () => {
         });
         jest.useFakeTimers();
         runner([
-            [
-                'trigger step',
-                'action step',
-                'action step 2'
-            ]
-        ], [
             {
-                text: 'trigger step',
-                type: 'trigger',
+                name: 'trigger step',
                 run: ({ next }) => {
-                    const newData = { one: 'one' };
-                    next(newData);
+                    next();
                     setTimeout(() => {
-                        next(newData);
+                        next();
                     }, 3000);
                 }
 
             },
             {
-                text: 'action step',
-                type: 'action',
-                run: ({ data, next }) => {
-                    const newData = { two: 'two' };
+                name: 'action step',
+                run: ({ next }) => {
 
-                    next(newData);
+                    next();
                 }
 
             },
             {
-                text: 'action step 2',
-                type: 'action',
+                name: 'action step 2',
                 run: actionStep2
 
             }
@@ -92,36 +102,5 @@ describe('runner', () => {
         jest.advanceTimersByTime(3000);
         expect(actionStep2).toHaveBeenCalledTimes(2);
 
-    });
-    it('happy path with variables', () => {
-        const actionStep1 = jest.fn(({ data, next }) => {
-            const newData = { two: 'two' };
-
-            next(newData);
-        });
-        runner([
-            [
-                'trigger based on value {1}',
-                'action step using {$name} property',
-                'action step 2'
-            ]
-        ], [
-            {
-                text: 'trigger based on value {}',
-                type: 'trigger',
-                run: ({ next }) => {
-                    const newData = { one: 'one' };
-                    next(newData);
-                }
-
-            },
-            {
-                text: 'action step using {} property',
-                type: 'action',
-                run: actionStep1
-
-            }
-        ]);
-        expect(actionStep1).toHaveBeenCalledTimes(1);
     });
 });

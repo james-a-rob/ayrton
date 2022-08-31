@@ -1,95 +1,50 @@
-# Description
-Automate any workflow in less time than it takes to write an email.
-
-No need to write tones of code, just write simple instructions in plain english. 
-
-I like to think of Ayrton as a no-code tool built for coders.
-
-(example gif. Typing in fun automation and running in cli)
+## Description
+Steptacular is a gradual automation tool built with TypeScript.
 
 
-# The Problem
-All developers have a huge todo list of tasks they want to automate but never find the time. Why?
+## The Problem
+Most developers have a huge list of boring manual tasks they want to automate but never find the time. Why? 
 
-The problem is that, even for experienced devs, writing automation takes a long time. Setting up a package, installing and using sdks, trying to remember cron syntax, error handling, deployment etc.
+The problem is that most automation is harder than it first appears and usually will involve a manual step along the way.
 
-Ayrton is a better way. You just write automation as a set of simple english instuctions and this library takes care of the rest.
+A classic example of an automation task that remains on the todo list is onboarding a new developer into the team. This usually requires:
 
-❌ For example, one common action in many automations is sending an SMS. In JavaScript you would have to write:
-``` javascript
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+ - Access to Github
+ - Access to Slack
+ - Access to internal tool X
+ - Access to internal tool Y
+ - Sending the new employee a set of helpful links
+ - Setting up a few kickoff meetings
 
-const message = 'hey from ayrton';
-const from = '+528273';
-const to = '+928757';
-try{
-    const message = await client.messages
-                .create({
-                    body: message,
-                    from: from,
-                    to: to
-                });
-}catch(e){
-    console.log('handle error')
-}
+Some of these steps are easy to automate, some are hard and some might be imposible. As developers we think about automating this but then usually fallback to a runbook style document in one of the companies many documentation tools. 
 
-
-```
-
-✔️ With ayrton this becomes:
-
-``` 
-send sms from {+528273} to {+928757} with message {hey from ayrton} 
-```
-
-Use one of the many [built in automation steps](built-in-steps.md) (known in Ayrton simply as a "step") like the SMS example above or build your own in TypeScript or JavaScript.
-
-
-## Features
-- Write workflow automations in plain text
-- Many built in utilities
-- Easily extended with JavaScript
-
-## Examples Automations
-
-### Hacker News alerts
-``` 
-every {60} minutes
-get top {20} HN stories 
-if {$title} contains {automation}
-send email with {new automation story on HN} and {$title} and {$url}
-```
-
-### Tweeting new products
-```
-When new item added to shopify store
-if {$product} is "discounted" 
-publish tweet {New product added to sale} {$description} {$price}
-```
+Steptacular uses the idea of [gradual automation](https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/). All automation starts as a set steps that just prompt the user with an instruction. This basic automation is easy to write and is already an improvment from a runbook style document becasue it ...
 
 ## Installation
 ```
-npm install -g ayrton
+npm install -g steptacular
 ```
 
 ## Usage
 ``` javascript
-import ayrton from 'ayrton';
+import steptacular from 'steptacular';
 
-ayrton.start('workflow/directory', 'custom-steps/directory');
-ayrton.on('error', (error)=>{
-    console.log(error);
-});
+steptacular([
+    {
+        name: 'Give access to Github',
+        run: ({utils, data, next}) => {
+            const prompt = { utils };
+            const email = prompt('Enter new employee email address then hit enter: ');
+
+            prompt(`Visit gtihub.com/company/users and add new user ${email}`);
+            next({email});
+        }
+    },
+    {
+        name: 'Give access to Slack',
+        run: ({data, next}) => {
+        }
+    }
+])
 ```
 
-## CLI Usage (TODO)
-```
-ayrton --workflows ~/me/workflows
-```
-
-## CLI run with custom steps (TODO)
-```
-ayrton --workflows ~/me/workflows --custom-steps ~/me/custom-steps
-```

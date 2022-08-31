@@ -1,3 +1,0 @@
-trigger step
-action step
-action step 2
