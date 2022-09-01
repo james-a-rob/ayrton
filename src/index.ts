@@ -8,12 +8,10 @@ const next = (data: any, steps: Step[], currentStep: number) => {
     }
 }
 
-const runner = (steps: Step[]) => {
+export const run = (steps: Step[]) => {
 
     if (steps[0]) {
         steps[0].run({ next: (data: any = {}) => { next(data, steps, 1) } })
 
     }
 };
-
-export default runner;

@@ -1,12 +1,11 @@
-// import lib
-// setup two steps add to slack and add to github
-import * as promptSync from 'prompt-sync';
-import * as open from 'open';
-import * as moment from 'moment';
-import runner from '../runner';
+import promptSync from 'prompt-sync';
+import open from 'open';
+import moment from 'moment';
+import { run } from 'steptacular';
+
 const prompt = promptSync({ sigint: true });
 
-runner([{
+run([{
     name: 'Tidy Kitchen',
     run: ({ next }) => {
         prompt('If there are dishes from last night then clean them then press enter');

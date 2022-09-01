@@ -1,2 +1,6 @@
-declare const steptacular: (workflowDirectory: string) => void;
-export default steptacular;
+interface Step {
+    name: string;
+    run: (args: any) => void;
+}
+export declare const run: (steps: Step[]) => void;
+export {};
