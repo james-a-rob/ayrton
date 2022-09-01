@@ -1,10 +1,11 @@
 {
   "name": "steptacular",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start:prompt-sample": "npm run build && node output/samples/prompt-sample.js",
+    "start:zx-sample": "npm run build && zx output/samples/zx-sample.ts",
     "build": "tsc",
     "test": "jest"
   },
@@ -26,6 +27,7 @@
     "moment": "^2.29.4",
     "node-cron": "^3.0.2",
     "open": "^8.4.0",
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.2.0",
+    "zx": "^7.0.8"
   }
 }

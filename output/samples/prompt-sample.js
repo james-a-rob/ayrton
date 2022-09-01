@@ -36,8 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import lib
-// setup two steps add to slack and add to github
 var promptSync = require("prompt-sync");
 var open = require("open");
 var moment = require("moment");
