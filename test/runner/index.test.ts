@@ -1,4 +1,4 @@
-import runner from '../../src/runner/index';
+import { run } from '../../src/index';
 
 
 describe('runner', () => {
@@ -7,7 +7,7 @@ describe('runner', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
             next();
         });
-        runner([
+        run([
             {
                 name: 'trigger step',
                 run: ({ next }) => {
@@ -39,7 +39,7 @@ describe('runner', () => {
 
             next(newData);
         });
-        runner([
+        run([
             {
                 name: 'trigger step',
                 run: ({ next }) => {
@@ -74,7 +74,7 @@ describe('runner', () => {
             next(newData);
         });
         jest.useFakeTimers();
-        runner([
+        run([
             {
                 name: 'trigger step',
                 run: ({ next }) => {

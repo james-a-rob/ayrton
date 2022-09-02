@@ -5,6 +5,10 @@ import { run } from 'steptacular';
 
 const prompt = promptSync({ sigint: true });
 
+run({
+    name: 1234
+})
+
 run([{
     name: 'Tidy Kitchen',
     run: ({ next }) => {

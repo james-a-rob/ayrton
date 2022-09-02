@@ -8,7 +8,11 @@ const next = (data, steps, currentStep) => {
 };
 const run = (steps) => {
     if (steps[0]) {
-        steps[0].run({ next: (data = {}) => { next(data, steps, 1); } });
+        steps[0].run({
+            next: (data = {}) => {
+                next(data, steps, 1);
+            }
+        });
     }
 };
 exports.run = run;
