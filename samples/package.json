@@ -13,7 +13,6 @@
   "dependencies": {
     "moment": "^2.29.4",
     "open": "^8.4.0",
-    "prompt-sync": "^4.2.0",
     "steptacular": "^0.0.3",
     "tsc": "^2.0.4",
     "typescript": "^4.8.2"

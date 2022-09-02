@@ -1,31 +1,25 @@
-import promptSync from 'prompt-sync';
 import open from 'open';
 import moment from 'moment';
 import { run } from 'steptacular';
 
-const prompt = promptSync({ sigint: true });
-
-run({
-    name: 1234
-})
 
 run([{
     name: 'Tidy Kitchen',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         prompt('If there are dishes from last night then clean them then press enter');
         next();
     }
 },
 {
     name: 'Feed cat',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         prompt(`Fill cat's food and water bowl then press enter`);
         next();
     }
 },
 {
     name: 'Take out bins',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         const weekDayNumber = moment().weekday();
         if (weekDayNumber === 3) {
             prompt('Take out the bins then press enter');
@@ -36,7 +30,7 @@ run([{
 },
 {
     name: 'Meditate for 10',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         prompt('Press enter to begin meditation');
         setTimeout(async () => {
             await open('https://www.youtube.com/watch?v=iNpXCzaWW1s');
@@ -47,14 +41,14 @@ run([{
 },
 {
     name: 'Make vitamin drink',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         prompt('Make vitamin drink then press enter');
         next();
     }
 },
 {
     name: 'Set daily goals',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         prompt('Set daily goals then press enter');
 
         next();
@@ -62,7 +56,7 @@ run([{
 },
 {
     name: 'Make breakfast',
-    run: ({ next }) => {
+    run: ({ utils: { prompt }, next }) => {
         console.log("Make a breafast. You could try");
         prompt('Once done press enter to finish');
 
