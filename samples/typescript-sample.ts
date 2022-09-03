@@ -1,6 +1,6 @@
-import { run } from 'steptacular';
+import { steptacular } from 'steptacular';
 
-run([
+steptacular([
     {
         name: 'step1',
         run: ({ utils, next }) => {

@@ -1,9 +1,8 @@
 import open from 'open';
 import moment from 'moment';
-import { run } from 'steptacular';
+import { steptacular } from 'steptacular';
 
-
-run([{
+steptacular([{
     name: 'Tidy Kitchen',
     run: ({ utils: { prompt }, next }) => {
         prompt('If there are dishes from last night then clean them then press enter');

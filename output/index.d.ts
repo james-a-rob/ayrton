@@ -13,5 +13,5 @@ interface Step {
     name: string;
     run: (args: RunArgs) => void;
 }
-export declare const run: (steps: Step[]) => void;
+export declare const steptacular: (steps: Step[]) => void;
 export {};

@@ -1,4 +1,4 @@
-import { run } from '../../src/index';
+import { steptacular } from '../../src/index';
 
 
 describe('runner', () => {
@@ -7,7 +7,7 @@ describe('runner', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
             next();
         });
-        run([
+        steptacular([
             {
                 name: 'trigger step',
                 run: ({ next }) => {
@@ -39,7 +39,7 @@ describe('runner', () => {
 
             next(newData);
         });
-        run([
+        steptacular([
             {
                 name: 'trigger step',
                 run: ({ next }) => {
@@ -74,7 +74,7 @@ describe('runner', () => {
             next(newData);
         });
         jest.useFakeTimers();
-        run([
+        steptacular([
             {
                 name: 'trigger step',
                 run: ({ next }) => {

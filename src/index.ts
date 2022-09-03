@@ -24,7 +24,7 @@ const next = (data: any, steps: Step[], currentStep: number) => {
     }
 }
 
-export const run = (steps: Step[]) => {
+export const steptacular = (steps: Step[]) => {
     if (steps[0]) {
         steps[0].run({ utils, next: (data: Data = {}) => { next(data, steps, 1) } })
 
