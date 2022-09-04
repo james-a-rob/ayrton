@@ -7,7 +7,7 @@ export default {
     prompt: (message: string) => {
         return prompt(message);
     },
-    dryRunable: (dryRun: boolean, func: any) => {
+    dryRunable: async (dryRun: boolean, func: any) => {
         console.log(dryRun, func)
         if (dryRun) {
             const entire = func.toString()
@@ -16,7 +16,7 @@ export default {
             console.log(body);
             return body;
         } else {
-            return func();
+            return await func();
 
         }
     }

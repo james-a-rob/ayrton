@@ -12,7 +12,7 @@ describe('utils', () => {
 
     it('supports dry runable switched on', () => {
 
-        const mockFunc = async () => {
+        const mockFunc = () => {
             console.log('this should not run when in dryrun mode');
             return "return value";
         };
