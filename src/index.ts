@@ -1,6 +1,6 @@
 import utils from './utils';
 
-interface Data {
+interface DataValue {
     [key: string]: string | number | object | []
 }
 
@@ -9,7 +9,7 @@ interface Utils {
 }
 
 interface RunArgs {
-    data?: object,
+    data: Data,
     utils: Utils,
     next: (data?: Data) => void
 }
@@ -18,15 +18,51 @@ interface Step {
     name: string
     run: (args: RunArgs) => void
 }
-const next = (data: any, steps: Step[], currentStep: number) => {
-    if (steps[currentStep]) {
-        steps[currentStep].run({ utils, data, next: (data: Data = {}) => next(data, steps, currentStep + 1) });
-    }
+
+interface Data {
+    value: DataValue
+    setData: (newData: object) => void
 }
 
-export const steptacular = (steps: Step[]) => {
-    if (steps[0]) {
-        steps[0].run({ utils, next: (data: Data = {}) => { next(data, steps, 1) } })
+interface StepError {
+    step: number
+    error: any
+}
 
+const data: Data = {
+    value: {},
+    setData: (newData: object) => {
+        data.value = { ...data.value, ...newData };
     }
 };
+
+export const steptacular = (
+    steps: Step[],
+    onError?: (stepError: StepError) => void,
+    currentStep: number = 0) => {
+    if (steps.length < 1) {
+        console.log('You need to provide a list of steps. See here for examples https://github.com/james-a-rob/steptacular#basic-usage');
+    }
+
+    if (currentStep < steps.length) {
+        try {
+            steps[currentStep].run({
+                utils,
+                data: data,
+                next: () => {
+                    steptacular(steps, onError, currentStep + 1);
+                }
+            });
+        } catch (error: any) {
+            if (onError) {
+                console.log(`Error in step ${currentStep}`);
+                const stepError = {
+                    step: currentStep,
+                    error
+                }
+                onError(stepError);
+            }
+
+        }
+    }
+}

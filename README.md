@@ -31,9 +31,9 @@ npm install steptacular
 ## Basic Usage
 Onboarding a new developer into the team
 ``` javascript
-import { run } from 'steptacular';
+import { steptacular } from 'steptacular';
 
-run([
+steptacular([
     {
         name: 'Give access to Github',
         run: ({utils: { prompt }, data, next}) => {

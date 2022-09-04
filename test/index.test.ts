@@ -1,9 +1,9 @@
-import { steptacular } from '../../src/index';
+import { steptacular } from '../src/index';
 
 
 describe('runner', () => {
 
-    it('simple', () => {
+    it('handles simple steps', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
             next();
         });
@@ -33,27 +33,27 @@ describe('runner', () => {
     });
 
 
-    it('simple with data passing', () => {
+    it('passes data between steps', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
-            const newData = { three: 'three' };
+            data.setData({ 'three': 'three' })
 
-            next(newData);
+            next();
         });
         steptacular([
             {
                 name: 'trigger step',
-                run: ({ next }) => {
-                    const newData = { one: 'one' };
-                    next(newData);
+                run: ({ data, next }) => {
+                    data.setData({ 'one': 'one' })
+                    next();
                 }
 
             },
             {
                 name: 'action step',
                 run: ({ data, next }) => {
-                    const newData = { two: 'two' };
+                    data.setData({ 'two': 'two' })
 
-                    next(newData);
+                    next();
                 }
 
             },
@@ -63,44 +63,32 @@ describe('runner', () => {
 
             }
         ]);
-        expect(actionStep2.mock.calls[0][0].data.two).toEqual('two');
+        expect(actionStep2.mock.calls[0][0].data.value.two).toEqual('two');
     });
 
-    it('happy path with multiple trigger callbacks', () => {
-        jest.setTimeout(300000);
+    it('handles errors uncaught exceptions gracefully', () => {
         const actionStep2 = jest.fn(({ data, next }) => {
-            const newData = { three: 'three' };
-
-            next(newData);
+            next();
         });
-        jest.useFakeTimers();
         steptacular([
             {
                 name: 'trigger step',
-                run: ({ next }) => {
-                    next();
-                    setTimeout(() => {
-                        next();
-                    }, 3000);
-                }
-
-            },
-            {
-                name: 'action step',
-                run: ({ next }) => {
-
+                run: ({ data, next }) => {
+                    throw new Error('error');
                     next();
                 }
 
             },
             {
-                name: 'action step 2',
+                name: 'trigger step 2',
                 run: actionStep2
-
             }
-        ]);
-        jest.advanceTimersByTime(3000);
-        expect(actionStep2).toHaveBeenCalledTimes(2);
+        ], (e) => {
+            expect(e.step === 0).toBe(true);
+            expect(e.error.message === 'error').toBe(true);
+        });
 
+        expect(actionStep2).not.toHaveBeenCalled();
     });
+
 });

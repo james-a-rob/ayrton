@@ -4,7 +4,8 @@ steptacular([
     {
         name: 'step1',
         run: ({ utils, next }) => {
+            utils.prompt("working");
             next();
         }
     }
-])
+]);

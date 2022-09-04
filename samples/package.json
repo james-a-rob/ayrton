@@ -2,10 +2,13 @@
   "name": "steptaculat-samples",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "start:prompt": "node prompt-sample.js",
+    "start:typescript": "npm run build && node output/typescript-sample.js",
+    "start:publish": "node publish-sample.mjs",
+    "start:zx": "node zx-sample.mjs",
     "build": "tsc"
   },
   "author": "",
@@ -15,6 +18,7 @@
     "open": "^8.4.0",
     "steptacular": "^0.0.3",
     "tsc": "^2.0.4",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "zx": "^7.0.8"
   }
 }
