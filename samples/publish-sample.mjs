@@ -31,7 +31,7 @@ steptacular([
         run: async ({ utils: { prompt, dryRunable }, data, next }) => {
             cd('../');
             prompt(`About to publish version ${data.value.versionNumber} to npm! Press enter to confirm: `);
-            dryRunable(async () => {
+            await dryRunable(async () => {
                 await $`npm publish`;
             });
             console.log('Check module publish successfully here https://www.npmjs.com/package/steptacular');
@@ -64,5 +64,5 @@ steptacular([
         }
     }
 ], {
-    dryRun: false
+    dryRun: true
 });

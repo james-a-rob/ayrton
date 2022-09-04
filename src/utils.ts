@@ -1,4 +1,4 @@
-import * as promptSync from 'prompt-sync';
+import promptSync from 'prompt-sync';
 
 const prompt = promptSync({ sigint: true });
 
@@ -7,7 +7,7 @@ export default {
     prompt: (message: string) => {
         return prompt(message);
     },
-    dryRunable: async (dryRun: boolean, func: any) => {
+    dryRunable: (dryRun: boolean, func: any) => {
         console.log(dryRun, func)
         if (dryRun) {
             const entire = func.toString()
@@ -16,7 +16,7 @@ export default {
             console.log(body);
             return body;
         } else {
-            return await func();
+            return func();
 
         }
     }
