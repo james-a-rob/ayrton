@@ -8,17 +8,21 @@ const data = {
         data.value = Object.assign(Object.assign({}, data.value), newData);
     }
 };
-const steptacular = (steps, onError, currentStep = 0) => {
+const steptacular = (steps, options = {}, currentStep = 0) => {
+    const { onError, dryRun = false } = options;
     if (steps.length < 1) {
         console.log('You need to provide a list of steps. See here for examples https://github.com/james-a-rob/steptacular#basic-usage');
     }
     if (currentStep < steps.length) {
         try {
             steps[currentStep].run({
-                utils: utils_1.default,
+                utils: {
+                    prompt: utils_1.default.prompt,
+                    dryRunable: (func) => utils_1.default.dryRunable(dryRun, func)
+                },
                 data: data,
                 next: () => {
-                    (0, exports.steptacular)(steps, onError, currentStep + 1);
+                    (0, exports.steptacular)(steps, options, currentStep + 1);
                 }
             });
         }
@@ -32,6 +36,7 @@ const steptacular = (steps, onError, currentStep = 0) => {
                 onError(stepError);
             }
         }
+        console.log('Finished');
     }
 };
 exports.steptacular = steptacular;

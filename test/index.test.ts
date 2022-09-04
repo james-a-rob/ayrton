@@ -83,9 +83,11 @@ describe('runner', () => {
                 name: 'trigger step 2',
                 run: actionStep2
             }
-        ], (e) => {
-            expect(e.step === 0).toBe(true);
-            expect(e.error.message === 'error').toBe(true);
+        ], {
+            onError: (e) => {
+                expect(e.step === 0).toBe(true);
+                expect(e.error.message === 'error').toBe(true);
+            }
         });
 
         expect(actionStep2).not.toHaveBeenCalled();

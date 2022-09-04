@@ -17,7 +17,7 @@ steptacular([
     {
         name: 'Check all samples still work',
         run: ({ utils: { prompt }, next }) => {
-            console.log('Run all samples and check they still work');
+            console.log('run all sample apps from inside samples repo');
             console.log('npm run start:prompt');
             console.log('npm run start:typescript');
             console.log('npm run start:publish');
@@ -28,11 +28,12 @@ steptacular([
     },
     {
         name: 'Publish to npm',
-        run: async ({ utils: { prompt }, data, next }) => {
+        run: async ({ utils: { prompt, dryRunable }, data, next }) => {
             cd('../');
-            console.log(data);
             prompt(`About to publish version ${data.value.versionNumber} to npm! Press enter to confirm: `);
-            await $`npm publish`;
+            dryRunable(async () => {
+                await $`npm publish`;
+            });
             console.log('Check module publish successfully here https://www.npmjs.com/package/steptacular');
             prompt('Press enter to continue: ');
             next();
@@ -41,11 +42,12 @@ steptacular([
     {
         name: 'Push to github',
         run: async ({ utils: { prompt }, data, next }) => {
-            prompt(`About to push version ${data.value.versionNumber} to Github! Press enter to confirm: `);
+            prompt(`About to commit version ${data.value.versionNumber} to git! Press enter to confirm: `);
 
             await $`git add -A`;
             await $`git commit -m "Releasing version ${data.value.versionNumber}"`;
-            await $`git push origin main`;
+            // await $`git push origin main`;
+            console.log("Push to Github. This must be done manually");
 
             prompt('Press enter to continue: ');
             next();
@@ -60,5 +62,7 @@ steptacular([
             prompt('Press enter to finsih: ');
             next();
         }
+    }, {
+        dryRun: true
     }
 ]);
