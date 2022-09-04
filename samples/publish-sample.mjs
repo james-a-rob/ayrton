@@ -62,7 +62,7 @@ steptacular([
             prompt('Press enter to finsih: ');
             next();
         }
-    }, {
-        dryRun: true
     }
-]);
+], {
+    dryRun: false
+});
