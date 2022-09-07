@@ -4,23 +4,26 @@ import { steptacular } from 'steptacular';
 
 steptacular([
     {
-        name: 'list files in parent directory',
-        run: async ({ next }) => {
+        name: 'List files in parent directory',
+        run: async ({ utiss: { prompt }, next }) => {
             cd('../');
             await $`dir`;
+            prompt('Press enter to continue');
             next();
         }
     }, {
-        name: 'make some request to the internet',
+        name: 'Make some request to the internet',
         run: async ({ next }) => {
             await $`curl -L https://jsonplaceholder.typicode.com/todos/1`;
+            prompt('Press enter to continue');
             next();
         }
     },
     {
-        name: 'do final manual step',
+        name: 'Do final manual step',
         run: ({ utils, next }) => {
             utils.prompt('Do manual job then hit enter');
+            prompt('Press enter to finish');
             next();
         }
     }

@@ -20,8 +20,16 @@ steptacular([
             console.log('run all sample apps from inside samples repo');
             console.log('npm run start:prompt');
             console.log('npm run start:typescript');
-            console.log('npm run start:publish');
             console.log('npm run start:zxt');
+            prompt('Press enter to continue: ');
+            next();
+        }
+    },
+    {
+        name: 'Add latest sample code to readme',
+        run: ({ utils: { prompt }, next }) => {
+            // could we detect via git if samples have changed?
+            console.log('If samples have been changed then add latest sample code to readme code example sections');
             prompt('Press enter to continue: ');
             next();
         }
@@ -59,7 +67,7 @@ steptacular([
             console.log('Visit https://github.com/james-a-rob/steptacular/releases/new');
             console.log(`Create a new release named "${data.value.versionNumber}"`);
             console.log('Add any new features, breaking changes and deprications');
-            prompt('Press enter to finsih: ');
+            prompt('Press enter to finish: ');
             next();
         }
     }

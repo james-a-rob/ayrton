@@ -56,7 +56,7 @@ export const steptacular = (
                 },
                 data: data,
                 next: () => {
-                    console.log('\n');
+                    console.log('\n\n');
                     steptacular(steps, options, currentStep + 1);
                 }
             });

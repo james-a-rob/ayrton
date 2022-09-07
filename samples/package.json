@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start:prompt": "node prompt-sample.js",
+    "start:morning": "node morning-routine-sample.js",
     "start:typescript": "npm run build && node output/typescript-sample.js",
     "start:publish": "node publish-sample.mjs",
     "start:zx": "node zx-sample.mjs",

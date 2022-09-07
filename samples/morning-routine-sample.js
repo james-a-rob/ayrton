@@ -23,20 +23,11 @@ steptacular([
             const weekDayNumber = moment().weekday();
             if (weekDayNumber === 3) {
                 prompt('Take out the bins then press enter');
+            } else {
+                console.log("It's not Wednesday so no action required")
             }
 
             next();
-        }
-    },
-    {
-        name: 'Meditate for 10',
-        run: ({ utils: { prompt }, next }) => {
-            prompt('Press enter to begin meditation');
-            setTimeout(async () => {
-                await open('https://www.youtube.com/watch?v=iNpXCzaWW1s');
-
-                next();
-            }, 1000 * 60 * 5);
         }
     },
     {
@@ -44,6 +35,18 @@ steptacular([
         run: ({ utils: { prompt }, next }) => {
             prompt('Make vitamin drink then press enter');
             next();
+        }
+    },
+    {
+        name: 'Meditate for 5 minutes',
+        run: ({ utils: { prompt }, next }) => {
+            prompt('Press enter to begin meditation');
+            setTimeout(async () => {
+                await open('https://www.youtube.com/watch?v=iNpXCzaWW1s');
+                prompt('Press enter to continue');
+
+                next();
+            }, 1000 * 60 * 5);
         }
     },
     {
@@ -57,7 +60,9 @@ steptacular([
     {
         name: 'Make breakfast',
         run: ({ utils: { prompt }, next }) => {
-            console.log("Make a breafast. You could try");
+            const breakfastOptions = ['toast', 'cereal', 'eggs', 'banana'];
+            const todaysSuggestedOption = breakfastOptions[Math.floor(Math.random() * breakfastOptions.length)];
+            console.log(`Make a breafast. You could have ${todaysSuggestedOption}`);
             prompt('Once done press enter to finish');
 
             next();
